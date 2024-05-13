@@ -1,0 +1,14 @@
+A blockchain is “a distributed database that maintains a continuously growing list of ordered records, 
+called blocks.” These blocks “are linked using cryptography. Each block contains a cryptographic hash of 
+the previous block, a timestamp, and transaction data.
+
+“Each block contains a hash (a digital fingerprint or unique identifier), 
+timestamped batches of recent valid transactions, and the hash of the previous block
+
+users, nodes or participants in the blockchain network will be connected through socket network.
+
+each node will have a copy of the database, means the transactions data is kept transparent and public in the network.
+
+PoW and PoS mechanisms will be implemented for consensus.
+
+smart contract mechanism will be implemented.
