@@ -1,4 +1,5 @@
 # include <iostream>
+# include "sqlite3.h"
 using namespace std;
 
 class Block
@@ -17,6 +18,7 @@ class Block
         //nuLL by default
         string next_block_hash;
 };
+
 int main()
 {
     return 0;
