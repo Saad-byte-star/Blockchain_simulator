@@ -1,6 +1,7 @@
 # include <iostream>
 # include "sqlite3.h"
 # include <vector>
+#include <openssl/sha.h> // SHA HASHING ALGORITM LIBRARY , NOT A BUILT IN LIBRARY , WE'LL NEED TO GET IT BEFORE RUNNING THE CODE.
 using namespace std;
 
 class Transaction;
@@ -78,7 +79,27 @@ class Block
         string calculateBlockHash() 
         { /* TODO
             read about block hashing and hashing algorithm to complete this
-         */ return ""; 
+         */
+         string dataToHash = previousBlockHash + timestamp + merkleRoot + to_string(nonce) + to_string(difficultyLevel); // GIVES IT DATA WHICH WILL BE USED IN THE HASH
+
+        // SHA256 ALGORITHM USED
+        SHA256_CTX sha256Context;
+        SHA256_Init(&sha256Context);    // TELLS THE COMPILER THE HASHING PATTERN/ALGORITHM
+        
+        SHA256_Update(&sha256Context, dataToHash.c_str(), dataToHash.length());   // ADDS OUR DATA STRING TO THE HASHING ALOGORITHM
+        
+        unsigned char hashResult[SHA256_DIGEST_LENGTH];
+        SHA256_Final(hashResult, &sha256Context);    // FINALIZEZ THE HASHING PROCESS AND GIVES A HASHED DIGEST
+        
+        // CONVERTING THE HASHED RESULT INTO A HEXADECIMAL STRING
+        string hashString;
+        for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i) {
+            char buf[3];
+            sprintf(buf, "%02x", hashResult[i]);
+            hashString += buf;
+        }
+        
+        return hashString; // RETURNS HASH
         }
 
         // Method to mine the block (you can implement your own)
